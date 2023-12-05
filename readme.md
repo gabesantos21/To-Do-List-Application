@@ -5,26 +5,26 @@ Description:
 
 Requirements:
 
-1. Task Display:
+- [x] Task Display:
 
     - Display a list of tasks with options to mark them as complete or incomplete.
     - Include a visual indication of the task's completion status.
 
-2. Add Task:
+- [x] Add Task:
 
     - Implement a form or input field to add a new task.
 When the user submits the form, the new task should be added to the list.
 
-3. Edit Task:
+- [x] Edit Task:
 
     - Allow users to edit the description of an existing task.
 Implement a way for users to initiate and confirm edits.
 
-4. Task Deletion:
+- [x] Task Deletion:
 
     - Enable users to delete a task. Deleting a task should remove it from the list.
 
-5. Persistence:
+- [x] Persistence:
 
     - Ensure that tasks persist even if the user refreshes the page. You can use local storage for this purpose.
 
@@ -32,6 +32,6 @@ Additional Challenges (Optional):
 
 - Implement a priority feature for tasks.
 
-- Include basic validation to prevent users from adding empty tasks.
+- [x] Include basic validation to prevent users from adding empty tasks.
 
 - Add a due date functionality for tasks.

@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To Do List Application</title>
-    <link rel="stylesheet" href="app.css">
-</head>
-<body>
-    <h1 id="helloWorld">Hello World</h1>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <div class="container">
+      <section class="addTask">
+        <h1>Todos</h1>
+        <form id="taskForm">
+          <br />
+          <input type="text" id="taskInput" placeholder="Ready, set, task!" />
+          <button class="addTaskBtn">+</button>
+        </form>
+        <div id="errorMessage"></div>
+      </section>
+
+      <hr />
+
+      <section class="viewTask">
+        <ul id="taskList"></ul>
+      </section>
+    </div>
 
     <script src="app.js"></script>
-</body>
+  </body>
 </html>
