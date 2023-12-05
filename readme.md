@@ -34,4 +34,8 @@ Additional Challenges (Optional):
 
 - [x] Include basic validation to prevent users from adding empty tasks.
 
-- Add a due date functionality for tasks.
+- [x] Add a due date functionality for tasks.
+
+- [x] Add sort by name and due date functionality for tasks.
+
+- [x] Add clear task button.
