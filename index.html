@@ -13,6 +13,7 @@
         <form id="taskForm">
           <br />
           <input type="text" id="taskInput" placeholder="Ready, set, task!" />
+          <input type="date" id="dueDateInput" class="due-date-input" />
           <button class="addTaskBtn">+</button>
         </form>
         <div id="errorMessage"></div>
@@ -20,11 +21,18 @@
 
       <hr />
 
+      <section class="sortMenu">
+        <button class="sortDateBtn">Sort by Date</button>
+        <button class="sortNameBtn">Sort by Name</button>
+        <button class="clearAllBtn">Clear All Task</button>
+      </section>
+
       <section class="viewTask">
         <ul id="taskList"></ul>
       </section>
-    </div>
 
+      <hr />
+    </div>
     <script src="app.js"></script>
   </body>
 </html>

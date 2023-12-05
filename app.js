@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const taskForm = document.getElementById('taskForm');
   const taskInput = document.getElementById('taskInput');
   const taskList = document.getElementById('taskList');
+  const dueDateInput = document.getElementById('dueDateInput');
   const errorMessage = document.getElementById('errorMessage');
 
   // Load tasks from localStorage
@@ -20,7 +21,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     errorMessage.textContent = '';
 
-    const newTask = { text: taskText, done: false, pinned: false };
+    const newTask = {
+      text: taskText,
+      done: false,
+      pinned: false,
+      dueDate: dueDateInput.value || null,
+    };
     savedTasks.push(newTask);
 
     // Save tasks to localStorage
@@ -28,24 +34,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
     renderTasks(savedTasks);
     taskInput.value = '';
+    dueDateInput.value = '';
   });
 
   function renderTasks(tasks) {
     taskList.innerHTML = '';
     tasks.forEach((task, index) => {
+      console.log(task);
       const listItem = document.createElement('li');
       listItem.innerHTML = `
           <div class="item">
+         
             <input class="taskItem ${task.done ? 'done' : ''} ${
         task.pinned ? 'pinned' : ''
-      }" type="text" value="${task.text}" disabled /> 
-            <input type="checkbox" class="pinCheckbox" ${
-              task.pinned ? 'checked' : ''
-            } />
-            <button class="doneToggleBtn" data-index="${index}">Done / Undo</button>
+      }" type="text" value="${task.text}" disabled 
+      /> 
+     
+      <input type="checkbox" class="pinCheckbox" ${
+        task.pinned ? 'checked' : ''
+      } />
+            <button class="doneToggleBtn" data-index="${index}">Done?</button>
             <button class="editTaskBtn" data-index="${index}">Edit</button>
             <button class="deleteTaskBtn" data-index="${index}">X</button>
           </div>
+          <div class="dueDateContainer"}>
+          <p class="taskDate ${task.done ? 'done' : ''} ${
+        task.pinned ? 'pinned' : ''
+      }">${task.dueDate ? `${task.dueDate}` : 'No Due Date'}</p>
+        </div>
         `;
       taskList.appendChild(listItem);
     });
@@ -80,6 +96,43 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('tasks', JSON.stringify(savedTasks));
         renderTasks(savedTasks);
       });
+    });
+
+    document
+      .querySelector('.sortDateBtn')
+      .addEventListener('click', (event) => {
+        const tasksWithDueDate = savedTasks.filter(
+          (task) => task.dueDate !== null
+        );
+        const tasksWithoutDueDate = savedTasks.filter(
+          (task) => task.dueDate === null
+        );
+
+        tasksWithDueDate.sort(
+          (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+        );
+
+        const sortedTasks = [...tasksWithDueDate, ...tasksWithoutDueDate];
+
+        renderTasks(sortedTasks);
+      });
+
+    document.querySelector('.sortNameBtn').addEventListener('click', () => {
+      savedTasks.sort((a, b) => {
+        const nameA = a.text.toUpperCase(); // Ignore case for sorting
+        const nameB = b.text.toUpperCase();
+        return nameA.localeCompare(nameB);
+      });
+
+      renderTasks(savedTasks);
+    });
+
+    document.querySelector('.clearAllBtn').addEventListener('click', () => {
+      taskInput.value = '';
+      dueDateInput.value = '';
+      savedTasks = []
+      localStorage.clear();
+      renderTasks(savedTasks)
     });
   }
 
