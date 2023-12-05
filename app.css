@@ -183,17 +183,26 @@ hr {
   color: #ca9d19;
 }
 
-.dueDateContainer {
+.bottomContainer {
   background-color: black;
   color: white;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   height: 20px;
   text-align: center;
-  width: 150px;
+  width: 200px;
   font-size: 14px;
   margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+.complete {
+  color: #04aa6d;
+}
+
+.incomplete {
+  color: #dc3545;
 }
 
 .sortMenu {

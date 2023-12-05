@@ -57,10 +57,14 @@ document.addEventListener('DOMContentLoaded', function () {
             <button class="editTaskBtn" data-index="${index}">Edit</button>
             <button class="deleteTaskBtn" data-index="${index}">X</button>
           </div>
-          <div class="dueDateContainer"}>
-          <p class="taskDate ${task.done ? 'done' : ''} ${
+          <div class="bottomContainer"}>
+          <p class="${task.done ? 'done' : ''} ${
         task.pinned ? 'pinned' : ''
       }">${task.dueDate ? `${task.dueDate}` : 'No Due Date'}</p>
+      |
+      <p class="${task.pinned ? 'pinned' : ''} ${
+        task.done ? 'complete' : 'incomplete'
+      }">${task.done ? `Finished` : 'Unfinished'}</p>
         </div>
         `;
       taskList.appendChild(listItem);
@@ -82,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (clickedElement.classList.contains('taskItem')) {
           handleToggleTaskStatus(clickedElement);
+          console.log(clickedElement);
         }
       });
     });
@@ -130,9 +135,9 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.clearAllBtn').addEventListener('click', () => {
       taskInput.value = '';
       dueDateInput.value = '';
-      savedTasks = []
+      savedTasks = [];
       localStorage.clear();
-      renderTasks(savedTasks)
+      renderTasks(savedTasks);
     });
   }
 
