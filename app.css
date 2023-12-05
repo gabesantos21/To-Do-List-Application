@@ -87,7 +87,7 @@ button {
 .addTaskBtn:active,
 .editTaskBtn:active,
 .deleteTaskBtn:active,
-.doneToggleBtn {
+.doneToggleBtn:active {
   transform: scale(0.95);
 }
 
@@ -129,6 +129,7 @@ button {
 .item {
   /* border: 1px solid green; */
   display: flex;
+  align-items: center;
   width: 100%;
 }
 
@@ -157,4 +158,11 @@ hr {
 #errorMessage {
   margin: 20px;
   color: #dc3545;
+}
+
+.pinCheckbox {
+  margin-left: 10px;
+}
+.pinned {
+  color: #ca9d19;
 }

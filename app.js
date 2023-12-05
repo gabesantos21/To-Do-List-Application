@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     errorMessage.textContent = '';
 
-    const newTask = { text: taskText, done: false };
+    const newTask = { text: taskText, done: false, pinned: false };
     savedTasks.push(newTask);
-    
+
     // Save tasks to localStorage
     localStorage.setItem('tasks', JSON.stringify(savedTasks));
 
@@ -36,10 +36,13 @@ document.addEventListener('DOMContentLoaded', function () {
       const listItem = document.createElement('li');
       listItem.innerHTML = `
           <div class="item">
-            <input class="taskItem ${
-              task.done ? 'done' : ''
-            }" type="text" value="${task.text}" disabled />
-            <button class="doneToggleBtn" data-index="${index}">&#10003;</button>
+            <input class="taskItem ${task.done ? 'done' : ''} ${
+        task.pinned ? 'pinned' : ''
+      }" type="text" value="${task.text}" disabled /> 
+            <input type="checkbox" class="pinCheckbox" ${
+              task.pinned ? 'checked' : ''
+            } />
+            <button class="doneToggleBtn" data-index="${index}">Done / Undo</button>
             <button class="editTaskBtn" data-index="${index}">Edit</button>
             <button class="deleteTaskBtn" data-index="${index}">X</button>
           </div>
@@ -64,6 +67,18 @@ document.addEventListener('DOMContentLoaded', function () {
         if (clickedElement.classList.contains('taskItem')) {
           handleToggleTaskStatus(clickedElement);
         }
+      });
+    });
+
+    document.querySelectorAll('.pinCheckbox').forEach((pinCheckbox, index) => {
+      pinCheckbox.addEventListener('change', () => {
+        savedTasks[index].pinned = pinCheckbox.checked;
+        if (savedTasks[index].pinned) {
+          savedTasks.unshift(savedTasks[index]);
+          savedTasks.splice(index + 1, 1);
+        }
+        localStorage.setItem('tasks', JSON.stringify(savedTasks));
+        renderTasks(savedTasks);
       });
     });
   }
@@ -99,11 +114,12 @@ document.addEventListener('DOMContentLoaded', function () {
       (taskItem) => ({
         text: taskItem.value,
         done: taskItem.classList.contains('done'),
+        pinned: taskItem.parentElement.querySelector('.pinCheckbox').checked,
       })
     );
 
     savedTasks = tasks;
     localStorage.setItem('tasks', JSON.stringify(tasks));
-    renderTasks(tasks);
+    renderTasks(savedTasks);
   }
 });

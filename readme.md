@@ -30,7 +30,7 @@ Implement a way for users to initiate and confirm edits.
 
 Additional Challenges (Optional):
 
-- Implement a priority feature for tasks.
+- [x] Implement a priority feature for tasks.
 
 - [x] Include basic validation to prevent users from adding empty tasks.
 
