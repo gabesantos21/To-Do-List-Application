@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
   function renderTasks(tasks) {
     taskList.innerHTML = '';
     tasks.forEach((task, index) => {
-      console.log(task);
       const listItem = document.createElement('li');
       listItem.innerHTML = `
           <div class="item">
@@ -53,7 +52,9 @@ document.addEventListener('DOMContentLoaded', function () {
       <input type="checkbox" class="pinCheckbox" ${
         task.pinned ? 'checked' : ''
       } />
-            <button class="doneToggleBtn" data-index="${index}">Done?</button>
+            <button class="doneToggleBtn ${
+              task.done ? '' : 'doneButton'
+            }" data-index="${index}">${task.done ? 'Undo' : 'Done'}</button>
             <button class="editTaskBtn" data-index="${index}">Edit</button>
             <button class="deleteTaskBtn" data-index="${index}">X</button>
           </div>
@@ -86,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (clickedElement.classList.contains('taskItem')) {
           handleToggleTaskStatus(clickedElement);
-          console.log(clickedElement);
         }
       });
     });

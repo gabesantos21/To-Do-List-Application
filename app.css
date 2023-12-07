@@ -172,6 +172,14 @@ hr {
   text-decoration: line-through;
 }
 
+.doneButton {
+  background-color: #04aa6d;
+}
+
+.doneButton:hover {
+  background-color: #056c3d;
+}
+
 .taskItem[disabled] {
   pointer-events: none;
 }
